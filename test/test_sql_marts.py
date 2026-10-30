@@ -49,8 +49,10 @@ def _tipos_ataque(tmp_path):
                 ],
             ),
             "incidentes": (
-                "incidente_id VARCHAR, codigos_ataque VARCHAR, natureza VARCHAR, "
-                "severidade VARCHAR, dano_real BOOLEAN",
+                (
+                    "incidente_id VARCHAR, codigos_ataque VARCHAR, natureza VARCHAR, "
+                    "severidade VARCHAR, dano_real BOOLEAN"
+                ),
                 [
                     # I1: dois tipos, CRED em primeiro; crítico, dano confirmado.
                     ("I1", "CRED;IPI", "incident", "critical", True),
@@ -129,8 +131,10 @@ def _tendencia(tmp_path, ultima_data):
         tmp_path,
         {
             "incidentes": (
-                "incidente_id VARCHAR, mes VARCHAR, data DATE, data_fim DATE, "
-                "natureza VARCHAR, severidade VARCHAR, dano_real BOOLEAN",
+                (
+                    "incidente_id VARCHAR, mes VARCHAR, data DATE, data_fim DATE, "
+                    "natureza VARCHAR, severidade VARCHAR, dano_real BOOLEAN"
+                ),
                 [
                     ("I1", "2025-01", date(2025, 1, 10), None, "incident", "critical", True),
                     # 2025-02 fica sem registro.
@@ -251,8 +255,10 @@ def test_registro_sem_url_fica_fora_de_qtd_fonte_unica(tmp_path):
         tmp_path,
         {
             "incidentes": (
-                "incidente_id VARCHAR, natureza VARCHAR, severidade VARCHAR, "
-                "dano_real BOOLEAN, contestado BOOLEAN",
+                (
+                    "incidente_id VARCHAR, natureza VARCHAR, severidade VARCHAR, "
+                    "dano_real BOOLEAN, contestado BOOLEAN"
+                ),
                 [
                     ("I1", "incident", "critical", True, False),
                     ("I2", "policy", "low", None, True),

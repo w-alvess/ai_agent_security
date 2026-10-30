@@ -116,9 +116,7 @@ def _listar_marts() -> list[tuple[Path, str]]:
 
 def _ler_sql(arquivo: Path) -> str:
     sql = arquivo.read_text(encoding="utf-8").rstrip()
-    if sql.endswith(";"):
-        sql = sql[:-1]
-    return sql
+    return sql.removesuffix(";")
 
 
 def _gravar(

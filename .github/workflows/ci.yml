@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  testes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: astral-sh/setup-uv@v6
+
+      # Instala o Python 3.14 e as versões exatas do uv.lock
+      - name: Instalar dependências
+        run: uv sync --locked
+
+      - name: Ruff
+        run: uv run ruff check .
+
+      # A cobertura mínima (60%) está no pyproject.toml
+      - name: Testes
+        run: uv run pytest --cov

@@ -224,8 +224,10 @@ def _verificar_conversoes(con: duckdb.DuckDBPyConnection) -> None:
             except duckdb.Error as erro:
                 _falhar(
                     [
-                        f"Conversão falhou em {DESTINO}.{tabela}.{nova} "
-                        f"(de {ORIGEM}.{origem}.{bruta}):",
+                        (
+                            f"Conversão falhou em {DESTINO}.{tabela}.{nova} "
+                            f"(de {ORIGEM}.{origem}.{bruta}):"
+                        ),
                         f"  {str(erro).splitlines()[0]}",
                     ]
                 )
@@ -241,15 +243,17 @@ def _verificar_conversoes(con: duckdb.DuckDBPyConnection) -> None:
         if vazio:
             _falhar(
                 [
-                    f"Pedaço vazio em {DESTINO}.incidentes.{multivalor} "
-                    f"(de {ORIGEM}.{origem}.{bruta}):",
+                    (
+                        f"Pedaço vazio em {DESTINO}.incidentes.{multivalor} "
+                        f"(de {ORIGEM}.{origem}.{bruta}):"
+                    ),
                     f"  {vazio[0][0]}: {vazio[0][1]!r}",
                 ]
             )
 
 
 def _verificar_chaves(con: duckdb.DuckDBPyConnection) -> None:
-    for tabela, (origem, chave, colunas) in TABELAS.items():
+    for origem, chave, colunas in TABELAS.values():
         para_bruta = {nova: bruta for bruta, nova, _ in colunas}
         chave_bruta = ", ".join(_q(para_bruta[c]) for c in chave)
         distintas = f"(SELECT DISTINCT * FROM {ORIGEM}.{origem})"
@@ -261,8 +265,10 @@ def _verificar_chaves(con: duckdb.DuckDBPyConnection) -> None:
         if conflitos:
             _falhar(
                 [
-                    f"Chave repetida com conteúdo diferente em {ORIGEM}.{origem} "
-                    f"(chave: {', '.join(para_bruta[c] for c in chave)}):"
+                    (
+                        f"Chave repetida com conteúdo diferente em {ORIGEM}.{origem} "
+                        f"(chave: {', '.join(para_bruta[c] for c in chave)}):"
+                    )
                 ]
                 + [f"  {linha}" for linha in conflitos]
             )
