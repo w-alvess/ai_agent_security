@@ -23,3 +23,18 @@ jobs:
       # A cobertura mínima (60%) está no pyproject.toml
       - name: Testes
         run: uv run pytest --cov
+
+  # O Streamlit Cloud publica sozinho a cada push; este job só registra o
+  # deploy no GitHub (quadro "Deployments") e confere que o painel responde.
+  deploy:
+    needs: testes
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: streamlit
+      url: https://ai-agent-security.streamlit.app
+    steps:
+      # O Streamlit redireciona por uma página de login que grava cookie;
+      # sem guardar o cookie (-c/-b), o curl fica em loop de redirect.
+      - name: Conferir que o painel responde
+        run: curl -fsSL -c cookies.txt -b cookies.txt -o /dev/null https://ai-agent-security.streamlit.app
