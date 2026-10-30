@@ -1,5 +1,7 @@
 # Incidentes de segurança com agentes de IA · 2024-26
 
+[![CI](https://github.com/w-alvess/ai_agent_security/actions/workflows/ci.yml/badge.svg)](https://github.com/w-alvess/ai_agent_security/actions/workflows/ci.yml)
+
 Pipeline de dados e painel sobre o dataset público
 [AI Agent Security and Real-World Incidents 2024-26](https://www.kaggle.com/datasets/muhammadahmerkhan/ai-agent-security-and-real-world-incidents-2024-26)
 do Kaggle: 395 registros de incidentes de segurança envolvendo agentes de IA,
