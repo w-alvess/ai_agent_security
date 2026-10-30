@@ -71,6 +71,16 @@ Abre a interface do DuckDB em http://localhost:4213. Encerre com `Ctrl+C`
 antes de rodar o pipeline de novo: o arquivo `.duckdb` aceita um único
 processo escrevendo.
 
+## Deploy
+
+O painel é publicado no [Streamlit Community Cloud](https://share.streamlit.io)
+a partir de [deploy.py](deploy.py). Na primeira visita, se o banco não existir,
+ele baixa o dataset e roda o pipeline inteiro (cerca de 1 minuto); depois abre
+o [app.py](app.py) normalmente.
+
+Localmente, use `app.py`: sem banco ele mostra o erro com os comandos, em vez
+de gerar sozinho.
+
 ## Marts
 
 | Tabela                       | Pergunta que responde                                 |
